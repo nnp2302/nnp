@@ -11,15 +11,12 @@ public class Cal {
 		int value2;
 		String so = new String();
 		 Scanner sc = new Scanner(System.in);
-		// In lựa chọn
 		System.out.println("Chọn phương thức:");
 		System.out.println("1. Tính toán cơ bản.");
-		// Chọn phương thức
 		lc = sc.nextByte();
 		sc.nextLine();
 
 		switch (lc) {
-			// PT1 Tính Toán Cơ Bản
 			case 1:
 				System.out.println("Nhập biểu thức");
 				String s = sc.nextLine();
@@ -27,7 +24,6 @@ public class Cal {
 				s="("+s;
 				s=s+")";
 				String bt = "";
-				// Xử lí trong ngoặc Bước 1
 				int first = s.lastIndexOf("(");
 				int last = s.indexOf(")");
 				while (first != -1) {
@@ -36,19 +32,24 @@ public class Cal {
 						bt = bt + s.charAt(value1);
 					}
 
-					// Xử lí trong ngoặc Bước 2
+			
 				     String bt1 = bt;
              		for (value2=1;value2<bt1.length()-1;value2++) {
                 		if (Character.isDigit(bt1.charAt(value2))){
                 		so = so +bt1.charAt(value2);
                 		
-                		}else { ar1[arN]=Integer.parseInt (so);arN++;
+						}else if (!Character.isDigit(bt1.charAt(value2+1))){
+							ar1[arN]=Integer.parseInt (so);arN++;
+							so= "-0";
+							ar2[arE]=bt1.charAt(value2);arE++;value2++;				
+						}
+						else{ar1[arN]=Integer.parseInt (so);arN++;
                 		        so= "0";
                 		        ar2[arE]=bt1.charAt(value2);arE++;			
                 		      }}
                 		ar1[arN]=Integer.parseInt (so);arN++;
         		       
-            //Tinh Toan	                                                            	                                              
+                                                                 	                                              
            for (int value3=0;value3<=arE;value3++) 	{
         	    if (ar2[value3]=='*') { 
         	        ar1[value3]=ar1[value3]*ar1[value3+1];
@@ -81,7 +82,7 @@ public class Cal {
    		      for (int value4=value3;value4<=arE;value4++) {
 					 ar2[value4]=ar2[value4+1];}
 					value3--;}}
-        	 //Tinh Toan Xong       
+        	      
 					 				
 			s=s.replace(bt,String.valueOf(ar1[0])	)	;
 			first= s.lastIndexOf("(");
